@@ -8,15 +8,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-let fetch; // Declare fetch variable
-
-// Use dynamic import for node-fetch
-try {
-    fetch = require('node-fetch');
-} catch (error) {
-    // Handle error
-    console.error('Error importing node-fetch:', error);
-}
+const axios = require('axios'); // Import axios for making HTTP requests
 
 const router = express.Router();
 router.use(cors());
@@ -75,16 +67,8 @@ router.get('/:fileId', async (req, res) => {
 
         if (mimeType && (mimeType.startsWith('image/') || mimeType.startsWith('video/'))) {
             res.setHeader('Content-Type', mimeType);
-            if (!fetch) {
-                console.error('node-fetch not available');
-                return res.status(500).send('Internal Server Error');
-            }
-            const response = await fetch.default(fileUrl);
-            if (!response.ok) {
-                console.error('Error fetching file from Backblaze B2:', response.statusText);
-                return res.status(500).send('Error fetching file');
-            }
-            response.body.pipe(res);
+            const response = await axios.get(fileUrl, { responseType: 'stream' });
+            response.data.pipe(res);
         } else {
             res.status(400).send('Requested file is not an image or video');
         }
@@ -94,5 +78,4 @@ router.get('/:fileId', async (req, res) => {
     }
 });
 
-// Export the router as the handler function
 module.exports.handler = router;
