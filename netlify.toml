@@ -1,0 +1,8 @@
+[build]
+  functions = "netlify/functions"
+
+[[redirects]]
+  force = true
+  from = "/:fileId"
+  status = 200
+  to = "/.netlify/functions/api/:fileId"
