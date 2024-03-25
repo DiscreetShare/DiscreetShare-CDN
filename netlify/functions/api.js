@@ -94,4 +94,5 @@ router.get('/:fileId', async (req, res) => {
     }
 });
 
-module.exports = router;
+// Export the router as the handler function
+module.exports.handler = router;
