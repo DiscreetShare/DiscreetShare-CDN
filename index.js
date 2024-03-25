@@ -19,7 +19,7 @@ const PORT = 8443;
 app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
 app.use(cors());
 
-const B2_BUCKET_URL = 'https://f001.backblazeb2.com/file/YOUR_BUCKET_NAME/'; // Replace with your B2 bucket URL
+const B2_BUCKET_URL = 'https://f005.backblazeb2.com/file/DiscreetShare-CDN/'; // Replace with your B2 bucket URL
 
 
 
