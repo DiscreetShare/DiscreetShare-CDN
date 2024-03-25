@@ -4,10 +4,12 @@ const express = require('express');
 const crypto = require('crypto');
 const zlib = require('zlib');
 const mime = require('mime-types');
-const fetch = require('node-fetch'); // For making HTTP requests
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
+
+// Use dynamic import for node-fetch
+const fetch = require('node-fetch').default;
 
 const router = express.Router();
 router.use(cors());
